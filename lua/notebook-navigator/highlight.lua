@@ -18,7 +18,12 @@ highlight.minihipatterns_spec = function(cell_markers, hl_group)
     extmark_opts = {
       virt_text = {
         {
-          "───────────────────────────────────────────────────────────────",
+          function()
+            local marker_length = #utils.get_cell_marker(buf_id, cell_markers) or 0
+            local description_length = 10 -- Adjust this based on actual description length
+            local line_length = 80 - marker_length - description_length
+            return string.rep("─", line_length)
+          end,
           hl_group,
         },
       },
